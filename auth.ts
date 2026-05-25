@@ -1,9 +1,10 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs"
+import { authConfig } from "./auth.config"
 
-// Split config to avoid importing prisma in edge middleware
-export const authConfig = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       name: "Credentials",
@@ -12,9 +13,8 @@ export const authConfig = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // Dynamic import inside authorize to keep it out of Edge runtime scope
         const { prisma } = await import("@/lib/prisma")
-        
+
         if (!credentials?.email || !credentials?.password) return null
 
         const user = await prisma.user.findUnique({
@@ -38,26 +38,4 @@ export const authConfig = {
       }
     })
   ],
-  callbacks: {
-    async session({ session, token }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub
-      }
-      return session
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id
-      }
-      return token
-    }
-  },
-  pages: {
-    signIn: "/login",
-  },
-  session: {
-    strategy: "jwt",
-  },
-}
-
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
+})

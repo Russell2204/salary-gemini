@@ -1,7 +1,7 @@
-import { auth } from "@/auth"
+import NextAuth from "next-auth"
+import { authConfig } from "./auth.config"
 
-// NextAuth v5 middleware pattern requires us to export the handler
-export default auth((req) => {
+export default NextAuth(authConfig).auth((req) => {
   const isLoggedIn = !!req.auth
   const { nextUrl } = req
   const isOnDashboard = nextUrl.pathname === "/"
