@@ -24,7 +24,7 @@ No seed script in package.json despite `prisma/seed.ts` existing — run via `np
 - **Next.js 16 App Router** — `app/` has pages + `app/api/` routes. Layout in Russian (`lang="ru"`).
 - **NextAuth v5 beta** — credentials provider, JWT sessions. Config in `auth.ts`; dynamic import of prisma inside `authorize()` keeps it out of Edge runtime.
 - **Middleware** (`middleware.ts`) — wraps `auth()`, protects `/` (dashboard), redirects logged-in users away from `/login` & `/register`. Matcher excludes `/api`, `_next/*`, `favicon.ico`.
-- **Gemini AI** — `POST /api/analyze` sends current-month data to `gemini-1.5-flash` with Russian-language prompts. Requires `GEMINI_API_KEY`.
+- **Gemini AI** — `POST /api/analyze` sends current-month data to `gemini-2.5-flash` with Russian-language prompts. Requires `GEMINI_API_KEY`.
 - **Components** — all client components; data fetching lives in `app/page.tsx` and flows via props + `onUpdate` callback.
 
 ## Prisma 7 quirks
