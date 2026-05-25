@@ -1,11 +1,4 @@
-import { PrismaClient } from '@prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-
-const adapter = new PrismaBetterSqlite3({
-  url: 'dev.db'
-})
-
-const prisma = new PrismaClient({ adapter })
+import { prisma } from '../lib/prisma'
 
 // 1 RUB ~ 140 UZS
 const UZS_FACTOR = 140;
