@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import Dashboard from '@/components/Dashboard';
+import AiAnalysis from '@/components/AiAnalysis';
 import IncomeSources from '@/components/IncomeSources';
 import AddExpenseForm from '@/components/AddExpenseForm';
 import TransactionsList from '@/components/TransactionsList';
@@ -128,6 +129,8 @@ export default function Home() {
 
       <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8">
         <Dashboard totalIncome={totalIncome} totalExpenses={totalExpenses} />
+        
+        <AiAnalysis />
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-8">
